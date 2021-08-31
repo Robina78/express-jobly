@@ -21,10 +21,10 @@ async function commonBeforeAll() {
   INSERT INTO jobs (title, salary, equity, company_handle)
   VALUES ('Job1', 100, '0.1', 'c1'),
          ('Job2', 200, '0.2', 'c1'),
-         ('Job3', 300, '0', 'c1')
+         ('Job3', 300, '0', 'c1'),
          ('Job4', NULL, NULL, 'c1')
          RETURNING id`);
-  testJobIds.splice(0, 0, ...resultsJobs.rows.map(row => row.id));
+  testJobIds.splice(0, 0, ...resultsJobs.rows.map(r => r.id));
 
   await db.query(`
         INSERT INTO users(username,
@@ -35,13 +35,15 @@ async function commonBeforeAll() {
         VALUES ('u1', $1, 'U1F', 'U1L', 'u1@email.com'),
                ('u2', $2, 'U2F', 'U2L', 'u2@email.com')
         RETURNING username`,
-      [
-        await bcrypt.hash("password1", BCRYPT_WORK_FACTOR),
-        await bcrypt.hash("password2", BCRYPT_WORK_FACTOR),
-      ]);
+    [
+      await bcrypt.hash("password1", BCRYPT_WORK_FACTOR),
+      await bcrypt.hash("password2", BCRYPT_WORK_FACTOR),
+    ]);
+
   await db.query(`
         INSERT INTO applications(username, job_id)
-        VALUES ('U1', $1)`, [testJobIds[0]]);    
+        VALUES ('u1', $1)`,
+    [testJobIds[0]]);
 }
 
 async function commonBeforeEach() {
@@ -55,7 +57,6 @@ async function commonAfterEach() {
 async function commonAfterAll() {
   await db.end();
 }
-
 
 module.exports = {
   commonBeforeAll,

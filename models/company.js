@@ -53,7 +53,7 @@ class Company {
     let query = `SELECT handle, 
                         name,
                         description,
-                        num_employees AS "numEmployees"
+                        num_employees AS "numEmployees",
                         logo_url AS "logoUrl"
                         FROM companies`;
                     

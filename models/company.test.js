@@ -134,7 +134,7 @@ describe("findAll", function () {
       {
         handle: "c1",
         name: "C1",
-        description: "Dec1",
+        description: "Desc1",
         numEmployees: 1,
         logoUrl: "http://c1.img",
       },

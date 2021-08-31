@@ -1,5 +1,6 @@
 "use strict";
 
+const { italic } = require("colors");
 const request = require("supertest");
 
 const app = require("../app");
@@ -19,7 +20,7 @@ afterAll(commonAfterAll);
 /************************************** POST /auth/token */
 
 describe("POST /auth/token", function () {
-  test("works", async function () {
+ test("works", async function () {
     const resp = await request(app)
         .post("/auth/token")
         .send({

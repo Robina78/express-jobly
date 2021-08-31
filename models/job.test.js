@@ -4,8 +4,8 @@ const { NotFoundError, BadRequestError } = require("../expressError");
 const db = require("../db.js");
 const Job = require("./job.js");
 const {
-    commonBeforAll,
-    commonBeforEach,
+    commonBeforeAll,
+    commonBeforeEach,
     commonAfterEach,
     commonAfterAll,
     testJobIds   

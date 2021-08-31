@@ -18,7 +18,7 @@ class Job {
         const result = await db.query(
             `INSERT INTO jobs (title, salary, equity, company_handle)
             VALUES ($1, $2, $3, $4)
-            RETURNING id, title, salary, equity, company_handle AS "companyHandle`,
+            RETURNING id, title, salary, equity, company_handle AS "companyHandle"`,
             [
                 data.title,
                 data.salary,
@@ -52,7 +52,7 @@ class Job {
         let whereExpressions = [];
         let queryValues = [];     
         
-        // For each possible search term, add to whereExoressions and 
+        // For each possible search term, add to whereExpressions and 
         // queryValuse so we can generate the rigth SQL
 
         if(minSalary !== undefined) {
@@ -70,7 +70,7 @@ class Job {
         }
 
         if(whereExpressions.length > 0) {
-            query += " Where " +whereExpressions.join(" AND ");
+            query += " Where " + whereExpressions.join(" AND ");
         }
 
         //Finalize query and return results
@@ -106,7 +106,7 @@ class Job {
             `SELECT handle,
                     name,
                     description,
-                    num_employess AS "numEmployees",
+                    num_employees AS "numEmployees",
                     logo_url AS "logoUrl"
              FROM companies
              WHERE handle = $1`, [job.companyHandle]);
